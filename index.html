@@ -245,8 +245,7 @@ h2{font-size:clamp(2.1rem,4.8vw,3.7rem);margin-top:16px}
 .carousel{position:relative;margin-top:54px;overflow:hidden}
 /* full-bleed: estica até as bordas da viewport no desktop */
 .carousel.convite-carousel,
-.carousel.midia-carousel,
-.carousel.pk-carousel{width:100vw;margin-left:calc(50% - 50vw)}
+.carousel.midia-carousel{width:100vw;margin-left:calc(50% - 50vw)}
 .carousel .track{display:flex;gap:18px;padding:8px 4px 22px;will-change:transform;transition:transform .65s cubic-bezier(.25,.6,.25,1)}
 .carousel .track.no-anim{transition:none}
 .carousel .c-item{flex:0 0 380px;max-width:380px;scroll-snap-align:center;position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--line);aspect-ratio:4/5;opacity:.4;filter:blur(3px) brightness(.72);transform:scale(.92);transition:opacity .55s ease,filter .55s ease,transform .55s ease;pointer-events:none}
@@ -400,13 +399,21 @@ footer p{margin:0;color:#5c554a;font-size:.68rem;letter-spacing:.2em;text-transf
 footer .f-sub{color:#4a443a;font-size:.58rem;letter-spacing:.24em}
 footer .f-sub a{color:var(--gold-dim);text-decoration:none;transition:.25s}
 footer .f-sub a:hover{color:var(--gold-hi)}
-/* carrossel de pacotes (cards de conteúdo, foco central, sem autoplay) */
-.carousel.pk-carousel .track{gap:26px;padding:10px 6px 34px}
-.carousel.pk-carousel .pk{flex:0 0 400px;max-width:400px;opacity:.45;filter:blur(2px) brightness(.78);transform:scale(.95);transition:opacity .55s ease,filter .55s ease,transform .55s ease;pointer-events:none}
-.carousel.pk-carousel .pk.active{opacity:1;filter:none;transform:scale(1);box-shadow:0 24px 70px rgba(201,150,60,.16),0 0 40px rgba(124,36,51,.16);pointer-events:auto}
-.carousel.pk-carousel .pk:hover{transform:scale(.95)}
-.carousel.pk-carousel .pk.active:hover{transform:scale(1)}
-@media(max-width:700px){.carousel.pk-carousel .pk{flex-basis:82%;max-width:320px}}
+/* pacotes: GRID no desktop, carrossel só no mobile */
+.carousel.pk-carousel{margin-top:54px;overflow:visible;width:auto;margin-left:0}
+.carousel.pk-carousel .track{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:26px;align-items:stretch;padding:0;transform:none!important;transition:none;width:100%}
+.carousel.pk-carousel .pk{flex:none;max-width:none;opacity:1!important;filter:none!important;transform:none!important;pointer-events:auto}
+.carousel.pk-carousel .pk[aria-hidden="true"]{display:none}
+.carousel.pk-carousel .c-nav{display:none}
+@media(max-width:900px){
+  .carousel.pk-carousel{width:100vw;margin-left:calc(50% - 50vw);overflow:hidden}
+  .carousel.pk-carousel .track{display:flex;gap:26px;padding:10px 6px 34px;width:auto}
+  .carousel.pk-carousel .pk{flex:0 0 82%;max-width:320px;opacity:.45;filter:blur(2px) brightness(.78);transform:scale(.95);transition:opacity .55s ease,filter .55s ease,transform .55s ease;pointer-events:none}
+  .carousel.pk-carousel .pk.active{opacity:1;filter:none;transform:scale(1);box-shadow:0 24px 70px rgba(201,150,60,.16),0 0 40px rgba(124,36,51,.16);pointer-events:auto}
+  .carousel.pk-carousel .pk:hover{transform:scale(.95)}
+  .carousel.pk-carousel .pk.active:hover{transform:scale(1)}
+  .carousel.pk-carousel .c-nav{display:flex}
+}
 /* reduced motion */
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
@@ -999,7 +1006,8 @@ function setupCarousel(trackId, P=2, autoplay=true){
 }
 setupCarousel('conviteTrack');
 setupCarousel('midiaTrack');
-setupCarousel('pkTrack', 1, false);
+// pacotes: carrossel só no mobile; desktop fica em grid
+if(matchMedia('(max-width:900px)').matches){setupCarousel('pkTrack', 1, false);}
 
 // menu mobile (hamburger + drawer)
 const menuBtn=document.getElementById('menuBtn');
