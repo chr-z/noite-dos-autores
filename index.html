@@ -399,20 +399,26 @@ footer p{margin:0;color:#5c554a;font-size:.68rem;letter-spacing:.2em;text-transf
 footer .f-sub{color:#4a443a;font-size:.58rem;letter-spacing:.24em}
 footer .f-sub a{color:var(--gold-dim);text-decoration:none;transition:.25s}
 footer .f-sub a:hover{color:var(--gold-hi)}
-/* pacotes: GRID no desktop, carrossel só no mobile */
-.carousel.pk-carousel{margin-top:54px;overflow:visible;width:auto;margin-left:0}
-.carousel.pk-carousel .track{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:26px;align-items:stretch;padding:0;transform:none!important;transition:none;width:100%}
-.carousel.pk-carousel .pk{flex:none;max-width:none;opacity:1!important;filter:none!important;transform:none!important;pointer-events:auto}
-.carousel.pk-carousel .pk[aria-hidden="true"]{display:none}
-.carousel.pk-carousel .c-nav{display:none}
+/* pacotes: 4 na mesma linha no desktop, swipe horizontal no mobile */
+.pk-scroll{position:relative;margin-top:54px}
+.pk-scroll-track{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;align-items:stretch}
+.pk-scroll .pk{min-width:0}
+.pk-scroll .pk-arrow,.pk-scroll .pk-hint,.pk-scroll .pk-dots{display:none}
 @media(max-width:900px){
-  .carousel.pk-carousel{width:100vw;margin-left:calc(50% - 50vw);overflow:hidden}
-  .carousel.pk-carousel .track{display:flex;gap:26px;padding:10px 6px 34px;width:auto}
-  .carousel.pk-carousel .pk{flex:0 0 82%;max-width:320px;opacity:.45;filter:blur(2px) brightness(.78);transform:scale(.95);transition:opacity .55s ease,filter .55s ease,transform .55s ease;pointer-events:none}
-  .carousel.pk-carousel .pk.active{opacity:1;filter:none;transform:scale(1);box-shadow:0 24px 70px rgba(201,150,60,.16),0 0 40px rgba(124,36,51,.16);pointer-events:auto}
-  .carousel.pk-carousel .pk:hover{transform:scale(.95)}
-  .carousel.pk-carousel .pk.active:hover{transform:scale(1)}
-  .carousel.pk-carousel .c-nav{display:flex}
+  .pk-scroll{width:100vw;margin-left:calc(50% - 50vw);overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:6px 0 12px}
+  .pk-scroll::-webkit-scrollbar{display:none}
+  .pk-scroll-track{display:flex;gap:16px;align-items:stretch;padding:4px max(16px,calc((100% - 340px)/2)) 18px}
+  .pk-scroll .pk{flex:0 0 min(340px,82%);scroll-snap-align:center;opacity:1;filter:none;transform:none;pointer-events:auto}
+  .pk-scroll .pk-arrow{display:flex;position:absolute;top:44%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;border:1px solid var(--gold-dim);background:rgba(20,17,10,.82);color:var(--gold-hi);font-size:1.35rem;cursor:pointer;z-index:5;align-items:center;justify-content:center;transition:.25s}
+  .pk-scroll .pk-arrow:hover{border-color:var(--gold);background:rgba(201,150,60,.15)}
+  .pk-scroll .pk-arrow:disabled{opacity:.3;cursor:default}
+  .pk-scroll .pk-prev{left:8px}
+  .pk-scroll .pk-next{right:8px}
+  .pk-scroll .pk-hint{display:block;text-align:center;font-size:.58rem;letter-spacing:.26em;text-transform:uppercase;color:var(--muted);margin-top:14px;transition:opacity .4s}
+  .pk-scroll .pk-hint.hidden{opacity:0}
+  .pk-scroll .pk-dots{display:flex;gap:8px;justify-content:center;margin-top:14px}
+  .pk-scroll .pk-dots .c-dot{width:8px;height:8px;border-radius:50%;background:var(--gold-dim);border:none;cursor:pointer;padding:0;transition:.25s}
+  .pk-scroll .pk-dots .c-dot.active{width:24px;border-radius:999px;background:var(--gold)}
 }
 /* reduced motion */
 @media(prefers-reduced-motion:reduce){
@@ -710,8 +716,8 @@ footer .f-sub a:hover{color:var(--gold-hi)}
       <p class="rv" style="color:var(--muted);margin-top:20px;max-width:640px;margin-inline:auto">Cada participação é uma experiência completa — livro, mídia e palco. <strong style="color:var(--cream)">Vagas limitadas.</strong></p>
     </div>
 
-    <div class="carousel pk-carousel">
-    <div class="track" id="pkTrack">
+    <div class="pk-scroll" id="pkScroll">
+    <div class="pk-scroll-track" id="pkTrack">
       <!-- P1 -->
       <div class="pk tagged rv">
         <span class="tag">Coautor</span>
@@ -768,11 +774,10 @@ footer .f-sub a:hover{color:var(--gold-hi)}
         <a class="btn btn-gold go-form" data-pkg="Premium" href="#participar">Quero a vaga única</a>
       </div>
     </div>
-    <div class="c-nav">
-      <button class="c-btn" id="pkPrev" aria-label="Anterior">‹</button>
-      <div class="c-dots" id="pkDots"></div>
-      <button class="c-btn" id="pkNext" aria-label="Próximo">›</button>
-    </div>
+    <button class="pk-arrow pk-prev" id="pkPrev" aria-label="Pacote anterior">‹</button>
+    <button class="pk-arrow pk-next" id="pkNext" aria-label="Próximo pacote">›</button>
+    <div class="pk-hint" id="pkHint">Deslize para ver as participações →</div>
+    <div class="pk-dots" id="pkDots"></div>
     </div>
 
   </div>
@@ -1006,8 +1011,46 @@ function setupCarousel(trackId, P=2, autoplay=true){
 }
 setupCarousel('conviteTrack');
 setupCarousel('midiaTrack');
-// pacotes: carrossel só no mobile; desktop fica em grid
-if(matchMedia('(max-width:900px)').matches){setupCarousel('pkTrack', 1, false);}
+
+// pacotes: swipe horizontal com snap (scroll nativo) — mobile; desktop em grid 4 col
+(function(){
+  const scroller=document.getElementById('pkScroll');
+  if(!scroller||!document.getElementById('pkTrack')) return;
+  const track=document.getElementById('pkTrack');
+  const prev=document.getElementById('pkPrev');
+  const next=document.getElementById('pkNext');
+  const hint=document.getElementById('pkHint');
+  const dotsWrap=document.getElementById('pkDots');
+  const cards=Array.from(track.children);
+  const dots=[];
+  cards.forEach((_,i)=>{
+    const d=document.createElement('button');
+    d.className='c-dot'+(i===0?' active':'');
+    d.setAttribute('aria-label','Pacote '+(i+1));
+    d.addEventListener('click',()=>{
+      const c=cards[i];
+      scroller.scrollTo({left:c.offsetLeft-scroller.clientWidth/2+c.offsetWidth/2,behavior:'smooth'});
+    });
+    dotsWrap.appendChild(d);dots.push(d);
+  });
+  function step(){return cards[0].offsetWidth+16;}
+  prev.addEventListener('click',()=>scroller.scrollBy({left:-step(),behavior:'smooth'}));
+  next.addEventListener('click',()=>scroller.scrollBy({left:step(),behavior:'smooth'}));
+  let raf=false;
+  function sync(){
+    const center=scroller.scrollLeft+scroller.clientWidth/2;
+    let best=0,bd=1e9;
+    cards.forEach((c,i)=>{const d=Math.abs(c.offsetLeft+c.offsetWidth/2-center);if(d<bd){bd=d;best=i;}});
+    dots.forEach((d,i)=>d.classList.toggle('active',i===best));
+    prev.disabled=scroller.scrollLeft<=4;
+    next.disabled=scroller.scrollLeft>=scroller.scrollWidth-scroller.clientWidth-4;
+    if(scroller.scrollLeft>10&&hint)hint.classList.add('hidden');
+    raf=false;
+  }
+  scroller.addEventListener('scroll',()=>{if(!raf){raf=true;requestAnimationFrame(sync);}},{passive:true});
+  window.addEventListener('resize',sync);
+  sync();
+})();
 
 // menu mobile (hamburger + drawer)
 const menuBtn=document.getElementById('menuBtn');
