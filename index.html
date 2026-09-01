@@ -238,6 +238,11 @@ h2{font-size:clamp(2.1rem,4.8vw,3.7rem);margin-top:16px}
 .f-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:36px}
 @media(max-width:700px){.f-grid{grid-template-columns:1fr}.form-box{padding:44px 22px}}
 .f-field label{display:block;font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;font-weight:600}
+.phone-wrap{display:flex;gap:8px;align-items:stretch}
+.phone-wrap select{flex:0 0 86px;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:14px;padding:0 8px;color:var(--cream);font-family:'Montserrat';font-size:.9rem;outline:none;transition:border .25s;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='6'%3E%3Cpath d='M0 0l4 6 4-6z' fill='%23c9963c'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;cursor:pointer;text-align:center}
+.phone-wrap select option{background:#14110a;color:var(--cream)}
+.phone-wrap input{flex:1 1 auto;min-width:0}
+.phone-wrap select:focus{border-color:var(--gold)}
 .f-field input,.f-field select,.f-field textarea{width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:14px;padding:15px 18px;color:var(--cream);font-family:'Montserrat';font-size:.92rem;outline:none;transition:border .25s}
 .f-field input:focus,.f-field select:focus,.f-field textarea:focus{border-color:var(--gold)}
 .f-field select option{background:#14110a}
@@ -856,7 +861,15 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
       <form id="leadForm">
         <div class="f-grid">
           <div class="f-field"><label for="fName">Seu nome *</label><input id="fName" required placeholder="Como você quer ser chamado"/></div>
-          <div class="f-field"><label for="fPhone">Seu WhatsApp *</label><input id="fPhone" required inputmode="tel" placeholder="+1 (___) ___-____"/></div>
+          <div class="f-field"><label for="fPhone">Seu WhatsApp *</label>
+            <div class="phone-wrap">
+              <select id="fCode" aria-label="Código do país">
+                <option value="+1">🇺🇸 +1</option>
+                <option value="+55">🇧🇷 +55</option>
+              </select>
+              <input id="fPhone" required inputmode="tel" placeholder="(___) ___-____"/>
+            </div>
+          </div>
           <div class="f-field"><label for="fInsta">Seu Instagram</label><input id="fInsta" inputmode="url" placeholder="@seu.nome"/></div>
           <div class="f-field"><label for="fPkg">O que te interessa?</label>
             <select id="fPkg">
@@ -939,7 +952,9 @@ document.getElementById('leadForm').addEventListener('submit',e=>{
   const hp=document.getElementById('fHp');
   if(hp&&hp.value){return;} // honeypot: bot preencheu, ignora
   const g=id=>document.getElementById(id).value.trim();
-  const lead={nome:g('fName'),whatsapp:g('fPhone'),interesse:g('fPkg'),insta:g('fInsta')};
+  const fCode=document.getElementById('fCode');
+  const code=fCode?fCode.value:'+1';
+  const lead={nome:g('fName'),whatsapp:(code+' '+g('fPhone')).trim(),interesse:g('fPkg'),insta:g('fInsta')};
   const msg=[
     '*NOITE DOS AUTORES — Novo interessado (site)*','',
     '*Nome:* '+lead.nome,
@@ -955,20 +970,37 @@ document.getElementById('leadForm').addEventListener('submit',e=>{
   if(btn){const old=btn.textContent;btn.textContent='Abrindo WhatsApp…';setTimeout(()=>{btn.textContent=old;},2600);}
 });
 
-// mascara de telefone (formato US)
+// mascara de telefone adaptativa (US 10 digitos / BR 11 com DDD)
 (function(){
   const p=document.getElementById('fPhone');
+  const codeSel=document.getElementById('fCode');
   if(!p) return;
-  p.addEventListener('input',()=>{
+  function mask(){
+    const code=codeSel?codeSel.value:'+1';
     let v=p.value.replace(/\D/g,'');
-    if(v.startsWith('1'))v=v.slice(1);
-    v=v.slice(0,10);
-    let out='+1';
-    if(v.length>0)out+=' ('+v.slice(0,3);
-    if(v.length>=3)out+=') '+v.slice(3,6);
-    if(v.length>=6)out+='-'+v.slice(6,10);
-    p.value=out;
-  });
+    const isBR=code==='+55';
+    if(isBR){
+      // remove DDD inicial se colado com codigo, mantem max 11
+      v=v.slice(0,11);
+      let out='(';
+      if(v.length>0)out+=v.slice(0,2);
+      if(v.length>=2)out+=') ';
+      if(v.length>2)out+=v.slice(2,7);
+      if(v.length>=7)out+='-'+v.slice(7,11);
+      p.value=out;
+    }else{
+      if(v.startsWith('1'))v=v.slice(1);
+      v=v.slice(0,10);
+      let out='';
+      if(v.length>0)out+='('+v.slice(0,3);
+      if(v.length>=3)out+=') '+v.slice(3,6);
+      if(v.length>=6)out+='-'+v.slice(6,10);
+      p.value=out;
+    }
+  }
+  p.addEventListener('input',mask);
+  p.addEventListener('focus',mask);
+  if(codeSel)codeSel.addEventListener('change',()=>{p.value='';p.placeholder=codeSel.value==='+55'?'(11) 98765-4321':'(___) ___-____';});
 })();
 
 // barra de progresso de leitura
