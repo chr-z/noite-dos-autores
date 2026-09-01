@@ -247,28 +247,6 @@ h2{font-size:clamp(2.1rem,4.8vw,3.7rem);margin-top:16px}
 .direct-card small{display:block;font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
 .direct-card b{font-size:.86rem;color:var(--cream);font-weight:500}
 
-/* CARROSSEL EVENTO (transform-based, 5 visíveis, foco central) */
-.carousel{position:relative;margin-top:54px;overflow:hidden}
-/* full-bleed: estica até as bordas da viewport no desktop */
-.carousel.convite-carousel,
-.carousel.midia-carousel{width:100vw;margin-left:calc(50% - 50vw)}
-.carousel .track{display:flex;gap:18px;padding:8px 4px 22px;will-change:transform;transition:transform .65s cubic-bezier(.25,.6,.25,1)}
-.carousel .track.no-anim{transition:none}
-.carousel .c-item{flex:0 0 380px;max-width:380px;scroll-snap-align:center;position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--line);aspect-ratio:4/5;opacity:.4;filter:blur(3px) brightness(.72);transform:scale(.92);transition:opacity .55s ease,filter .55s ease,transform .55s ease;pointer-events:none}
-.carousel .c-item.active{opacity:1;filter:blur(0) brightness(1);transform:scale(1.05);box-shadow:0 24px 70px rgba(201,150,60,.2);pointer-events:auto}
-.carousel .c-item img{width:100%;height:100%;object-fit:cover;display:block}
-.carousel .c-item::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(6,5,4,.72));pointer-events:none}
-.carousel .c-item.active::after{background:linear-gradient(180deg,transparent 55%,rgba(6,5,4,.55))}
-.carousel .c-nav{display:flex;justify-content:center;align-items:center;gap:22px;margin-top:14px}
-.carousel .c-btn{width:44px;height:44px;border-radius:50%;border:1px solid var(--gold-dim);background:rgba(20,17,10,.5);color:var(--gold-hi);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.25s}
-.carousel .c-btn:hover{border-color:var(--gold);background:rgba(201,150,60,.15)}
-.carousel .c-dots{display:flex;gap:8px}
-.carousel .c-dot{width:8px;height:8px;border-radius:50%;background:var(--gold-dim);border:none;cursor:pointer;transition:.25s;padding:0}
-.carousel .c-dot.active{width:24px;border-radius:999px;background:var(--gold)}
-/* mobile: cards menores para caber bem */
-@media(max-width:700px){.carousel .c-item{flex-basis:72%;max-width:300px}}
-@media(max-width:460px){.carousel .c-item{flex-basis:82%;max-width:280px}}
-
 /* LIVRO — capítulo I */
 .livro-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);gap:64px;align-items:center;width:100%}
 @media(max-width:900px){.livro-grid{grid-template-columns:1fr;gap:40px}}
@@ -559,21 +537,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
       <p class="big-quote rv" style="font-family:'Cormorant Garamond';font-style:italic;font-size:clamp(1.4rem,3vw,2rem);color:var(--gold-hi);margin-top:30px">“Em dezembro, é a sua história que sobe ao palco.”</p>
     </div>
   </div>
-  <div class="carousel convite-carousel">
-    <div class="track" id="conviteTrack">
-      <div class="c-item active"><img src="assets/convite-1.webp" alt="Imagine o seu nome sendo anunciado — uma noite criada para reconhecer sua trajetória e apresentar você ao mercado como autor" fetchpriority="high"/></div>
-      <div class="c-item"><img src="assets/convite-2.webp" alt="Você atravessa o tapete vermelho enquanto sua trajetória é registrada"/></div>
-      <div class="c-item"><img src="assets/convite-3.webp" alt="No palco, você apresenta a história que deu origem ao seu livro"/></div>
-      <div class="c-item"><img src="assets/convite-4.webp" alt="Na plateia, leitores, convidados e novas conexões conhecem a pessoa por trás da obra"/></div>
-      <div class="c-item"><img src="assets/convite-5.webp" alt="Sua participação também ganha espaço editorial em uma revista"/></div>
-      <div class="c-item"><img src="assets/convite-6.webp" alt="Uma experiência de reconhecimento, literatura e posicionamento — viva essa noite como autor"/></div>
-    </div>
-    <div class="c-nav">
-      <button class="c-btn" id="convitePrev" aria-label="Anterior">‹</button>
-      <div class="c-dots" id="conviteDots"></div>
-      <button class="c-btn" id="conviteNext" aria-label="Próximo">›</button>
-    </div>
-  </div>
   <div class="wrap">
     <div class="journey">
       <div class="j-line" aria-hidden="true"></div>
@@ -739,20 +702,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
         </div>
       </div>
       <p class="note rv">*Disponível nas participações Destaque e Premium.</p>
-    </div>
-  </div>
-  <div class="carousel midia-carousel">
-    <div class="track" id="midiaTrack">
-      <div class="c-item active"><img src="assets/midia-1.webp" alt="Antes de ler o seu livro, precisam conhecer o seu nome" fetchpriority="high"/></div>
-      <div class="c-item"><img src="assets/midia-2.webp" alt="Uma grande obra conta uma história extraordinária, mas é o posicionamento que faz essa história alcançar novos espaços"/></div>
-      <div class="c-item"><img src="assets/midia-3.webp" alt="A Noite dos Autores vai além de um lançamento tradicional"/></div>
-      <div class="c-item"><img src="assets/midia-4.webp" alt="Ela reúne literatura, imagem, visibilidade e reconhecimento em uma experiência exclusiva"/></div>
-      <div class="c-item"><img src="assets/midia-5.webp" alt="Não espere que descubram sua história — apresente-a ao mundo. Conheça as possibilidades de participação"/></div>
-    </div>
-    <div class="c-nav">
-      <button class="c-btn" id="midiaPrev" aria-label="Anterior">‹</button>
-      <div class="c-dots" id="midiaDots"></div>
-      <button class="c-btn" id="midiaNext" aria-label="Próximo">›</button>
     </div>
   </div>
 </section>
@@ -1031,128 +980,6 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.targ
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 
 // carrossel de imagens (transform-based, roll infinito real, 5 visíveis, 2 clones de cada lado)
-function setupCarousel(trackId, P=2, autoplay=true){
-  const track=document.getElementById(trackId);
-  if(!track) return;
-  const dotsWrap=document.getElementById(trackId.replace('Track','Dots'));
-  const prev=document.getElementById(trackId.replace('Track','Prev'));
-  const next=document.getElementById(trackId.replace('Track','Next'));
-  const originals=Array.from(track.children);
-  const N=originals.length;
-  // P clones de cada lado (default 2 = 5 visíveis; P=1 = 3 visíveis)
-  // clones: últimos P no início, primeiros P no fim
-  const pre=[], post=[];
-  for(let i=0;i<P;i++){
-    const c=originals[(N-P+i+N)%N].cloneNode(true);
-    c.classList.remove('active');
-    c.setAttribute('aria-hidden','true');
-    pre.push(c);
-    const c2=originals[i%N].cloneNode(true);
-    c2.classList.remove('active');
-    c2.setAttribute('aria-hidden','true');
-    post.push(c2);
-  }
-  pre.forEach(c=>track.insertBefore(c,originals[0]));
-  post.forEach(c=>track.appendChild(c));
-  const all=Array.from(track.children);         // N+2P
-  const FIRST=P, LAST=P+N-1;                    // índices reais dos originais
-  originals.forEach((_,i)=>{
-    const d=document.createElement('button');
-    d.className='c-dot'+(i===0?' active':'');
-    d.setAttribute('aria-label','Ir para imagem '+(i+1));
-    d.addEventListener('click',()=>go(FIRST+i));
-    dotsWrap.appendChild(d);
-  });
-  const dots=Array.from(dotsWrap.children);
-  let current=FIRST;
-  let animTimer=null;
-  function setActive(i){
-    const real=((i-FIRST)%N+N)%N;
-    // limpa TODOS (originais e clones) e aplica no item que está visualmente no centro
-    all.forEach(el=>el.classList.remove('active'));
-    all[i].classList.add('active');
-    dots.forEach((d,ix)=>d.classList.toggle('active',ix===real));
-  }
-  function step(){
-    const item=all[FIRST];
-    const gap=parseFloat(getComputedStyle(track).gap)||0;
-    return item.offsetWidth+gap;
-  }
-  function position(){
-    const unit=step();
-    const viewport=track.clientWidth;
-    const itemW=all[FIRST].offsetWidth;
-    const offset=current*unit - (viewport-itemW)/2;
-    track.style.transform='translateX('+(-offset)+'px)';
-  }
-  function go(i,animated){
-    const clamped=Math.max(0,Math.min(all.length-1,i));
-    if(clamped===current && animated!==false) return;
-    current=clamped;
-    setActive(clamped);
-    if(animated===false){
-      track.classList.add('no-anim');
-      position();
-      void track.offsetWidth;
-      track.classList.remove('no-anim');
-    }else{
-      if(animTimer) clearTimeout(animTimer);
-      // aplica posição imediatamente; a transição CSS anima do valor atual pro novo
-      position();
-      animTimer=setTimeout(()=>{
-        // reset sem animação nas pontas para o original equivalente
-        if(current<P){ const target=FIRST+current; track.classList.add('no-anim'); current=target; position(); void track.offsetWidth; track.classList.remove('no-anim'); setActive(target); }
-        if(current>=all.length-P){ const target=FIRST+((current-FIRST)%N); track.classList.add('no-anim'); current=target; position(); void track.offsetWidth; track.classList.remove('no-anim'); setActive(target); }
-      },700);
-    }
-  }
-  prev.addEventListener('click',()=>go(current-1,true));
-  next.addEventListener('click',()=>go(current+1,true));
-  // autoplay — SÓ quando visível
-  let auto=null;
-  let inView=false;
-  const carObserver=new IntersectionObserver(es=>{
-    es.forEach(e=>{inView=e.isIntersecting;if(inView){if(autoplay)startAuto();}else{stopAuto();}});
-  },{threshold:.35});
-  carObserver.observe(track);
-  function startAuto(){
-    if(auto) return;
-    auto=setInterval(()=>{if(document.hidden)return;go(current+1,true);},4200);
-  }
-  function stopAuto(){
-    if(auto){clearInterval(auto);auto=null;}
-  }
-  track.addEventListener('mouseenter',stopAuto);
-  track.addEventListener('mouseleave',()=>{if(inView)startAuto();});
-  track.addEventListener('touchstart',stopAuto,{passive:true});
-  track.addEventListener('touchend',()=>{if(inView)startAuto();},{passive:true});
-  // swipe básico
-  let sx=0;
-  track.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;},{passive:true});
-  track.addEventListener('touchend',e=>{
-    const dx=e.changedTouches[0].clientX-sx;
-    if(Math.abs(dx)>40){ if(dx<0) go(current+1,true); else go(current-1,true); }
-  },{passive:true});
-  // posiciona inicial (sem animação)
-  go(FIRST,false);
-  // pré-carrega todas as imagens (evita lista vazia na transição)
-  originals.forEach(o=>{
-    const im=o.querySelector('img');
-    if(im && !im.complete){
-      const p=new Image();
-      p.src=im.getAttribute('src');
-    }
-  });
-  // re-posiciona ao redimensionar (evita centralização quebrada)
-  let rT;
-  window.addEventListener('resize',()=>{
-    clearTimeout(rT);
-    rT=setTimeout(()=>{track.classList.add('no-anim');position();void track.offsetWidth;track.classList.remove('no-anim');},120);
-  });
-}
-setupCarousel('conviteTrack');
-setupCarousel('midiaTrack');
-
 // pacotes: swipe horizontal com snap (scroll nativo) — mobile; desktop em grid 4 col
 (function(){
   const scroller=document.getElementById('pkScroll');
