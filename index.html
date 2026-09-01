@@ -375,6 +375,7 @@ nav ul a:hover::after{transform:scaleX(1)}
 @media(max-width:720px){
   .tl{flex-direction:column;overflow:visible;margin-top:44px}
   .step{position:relative;border-left:1px solid var(--line);border-top:none;padding:0 0 32px 26px;margin:0 0 0 6px;text-align:left}
+  .step:first-child{border-left:1px solid var(--line)}
   .step::before{content:'';position:absolute;left:-5px;top:3px;width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px rgba(201,150,60,.8)}
   .step:last-child{padding-bottom:0}
 }
