@@ -411,11 +411,6 @@ footer .f-sub a:hover{color:var(--gold-hi)}
   .pk-scroll::-webkit-scrollbar{display:none}
   .pk-scroll-track{display:flex;gap:16px;align-items:stretch;padding:4px max(16px,calc((100% - 340px)/2)) 18px}
   .pk-scroll .pk{flex:0 0 min(340px,82%);scroll-snap-align:center;opacity:1;filter:none;transform:none;pointer-events:auto}
-  .pk-scroll .pk-arrow{display:flex;position:absolute;top:44%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;border:1px solid var(--gold-dim);background:rgba(20,17,10,.82);color:var(--gold-hi);font-size:1.35rem;cursor:pointer;z-index:5;align-items:center;justify-content:center;transition:.25s}
-  .pk-scroll .pk-arrow:hover{border-color:var(--gold);background:rgba(201,150,60,.15)}
-  .pk-scroll .pk-arrow:disabled{opacity:.3;cursor:default}
-  .pk-scroll .pk-prev{left:8px}
-  .pk-scroll .pk-next{right:8px}
   .pk-scroll .pk-hint{display:block;text-align:center;font-size:.58rem;letter-spacing:.26em;text-transform:uppercase;color:var(--muted);margin-top:14px;transition:opacity .4s}
   .pk-scroll .pk-hint.hidden{opacity:0}
   .pk-scroll .pk-dots{display:flex;gap:8px;justify-content:center;margin-top:14px}
@@ -1028,8 +1023,6 @@ setupCarousel('midiaTrack');
   const scroller=document.getElementById('pkScroll');
   if(!scroller||!document.getElementById('pkTrack')) return;
   const track=document.getElementById('pkTrack');
-  const prev=document.getElementById('pkPrev');
-  const next=document.getElementById('pkNext');
   const hint=document.getElementById('pkHint');
   const dotsWrap=document.getElementById('pkDots');
   const cards=Array.from(track.children);
@@ -1044,17 +1037,12 @@ setupCarousel('midiaTrack');
     });
     dotsWrap.appendChild(d);dots.push(d);
   });
-  function step(){return cards[0].offsetWidth+16;}
-  prev.addEventListener('click',()=>scroller.scrollBy({left:-step(),behavior:'smooth'}));
-  next.addEventListener('click',()=>scroller.scrollBy({left:step(),behavior:'smooth'}));
   let raf=false;
   function sync(){
     const center=scroller.scrollLeft+scroller.clientWidth/2;
     let best=0,bd=1e9;
     cards.forEach((c,i)=>{const d=Math.abs(c.offsetLeft+c.offsetWidth/2-center);if(d<bd){bd=d;best=i;}});
     dots.forEach((d,i)=>d.classList.toggle('active',i===best));
-    prev.disabled=scroller.scrollLeft<=4;
-    next.disabled=scroller.scrollLeft>=scroller.scrollWidth-scroller.clientWidth-4;
     if(scroller.scrollLeft>10&&hint)hint.classList.add('hidden');
     raf=false;
   }
