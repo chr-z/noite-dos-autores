@@ -48,6 +48,8 @@
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="assets/hero.webp">
+<link rel="preload" as="image" href="assets/logo-noite.webp">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -426,6 +428,15 @@ footer .f-sub a:hover{color:var(--gold-hi)}
   .rv{opacity:1;transform:none}
   .grain,.glow{display:none}
 }
+/* anchors nao ficam cobertos pela nav fixa */
+section[id],header[id]{scroll-margin-top:72px}
+/* fade nas bordas do marquee */
+.marquee{position:relative}
+.marquee::before,.marquee::after{content:'';position:absolute;top:0;bottom:0;width:90px;z-index:2;pointer-events:none}
+.marquee::before{left:0;background:linear-gradient(90deg,#120a0e,transparent)}
+.marquee::after{right:0;background:linear-gradient(270deg,#120a0e,transparent)}
+/* foco visivel p/ acessibilidade de teclado */
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
 </style>
 </head>
 <body>
@@ -1051,6 +1062,17 @@ setupCarousel('midiaTrack');
   window.addEventListener('resize',sync);
   sync();
 })();
+
+// botões go-form: preenchem o select de participação antes de levar ao form
+document.querySelectorAll('.go-form').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const pkg=btn.getAttribute('data-pkg');
+    const sel=document.getElementById('fPkg');
+    if(!pkg||!sel) return;
+    const map={'Coautor':'Coautor — capítulo em Palavras da Alma','Autor':'Autor — livro próprio','Autor Destaque':'Autor Destaque','Premium':'Premium — vaga única'};
+    if(map[pkg]) sel.value=map[pkg];
+  });
+});
 
 // menu mobile (hamburger + drawer)
 const menuBtn=document.getElementById('menuBtn');
