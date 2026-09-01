@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <meta name="theme-color" content="#060504"/>
 <link rel="icon" type="image/png" href="assets/favicon.png"/>
+<link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png"/>
 <title>Noite dos Autores — Sua história merece virar um livro | 05.12.2026</title>
 <meta name="description" content="Você viveu. Você venceu. Você recomeçou. Agora transforme sua história em livro publicado, com mídia, podcast e a Gala Noite dos Autores em 05 de dezembro de 2026. Vagas limitadas."/>
 <meta name="robots" content="index, follow, max-image-preview:large"/>
@@ -84,17 +85,19 @@ header .ornament{margin:26px auto 30px;max-width:300px}
 .cta-row{margin-top:42px}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:18px 32px;border-bottom:1px solid transparent;transition:.35s}
-nav.solid{background:rgba(6,5,4,.9);backdrop-filter:blur(14px);border-bottom-color:var(--line)}
-nav .brand{font-family:'Cormorant Garamond',serif;font-size:1.3rem;letter-spacing:.24em;color:var(--cream);text-decoration:none;text-transform:uppercase}
+nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:16px 32px;border-bottom:1px solid transparent;transition:.35s}
+nav.solid{background:rgba(6,5,4,.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom-color:var(--line)}
+.nav-left{display:flex;align-items:center;gap:14px}
+.zimny-mark{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:radial-gradient(circle at 32% 26%,rgba(201,150,60,.14),rgba(6,5,4,.55));transition:.3s;flex-shrink:0}
+.zimny-mark img{width:22px;height:22px;display:block;filter:drop-shadow(0 2px 8px rgba(201,150,60,.35))}
+.zimny-mark:hover{border-color:var(--gold);box-shadow:0 0 20px rgba(201,150,60,.35);transform:translateY(-1px)}
+nav .brand{font-family:'Cormorant Garamond',serif;font-size:1.28rem;letter-spacing:.22em;color:var(--cream);text-decoration:none;text-transform:uppercase}
 nav .brand b{color:var(--gold)}
 nav ul{display:flex;gap:32px;list-style:none;align-items:center}
 nav ul a{color:var(--muted);text-decoration:none;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;transition:.25s}
 nav ul a:hover{color:var(--gold-hi)}
 nav .nav-cta{border:1px solid var(--gold-dim);padding:9px 20px;border-radius:999px;color:var(--gold-hi)!important}
-nav .nav-home{color:var(--gold-hi);font-weight:600}
-nav .nav-home:hover{color:#fff}
-@media(max-width:900px){nav ul li:not(:last-child):not(:nth-last-child(2)){display:none}}
+@media(max-width:900px){nav ul{display:none}}
 
 /* HERO */
 header{min-height:100svh;position:relative;overflow:hidden}
@@ -476,14 +479,18 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 
 <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 <nav id="nav">
-  <a class="brand" href="#topo">Noite<b> dos Autores</b></a>
+  <div class="nav-left">
+    <a class="zimny-mark" href="https://zimnymagazine.com" target="_blank" rel="noopener" aria-label="Zimny Magazine — site oficial">
+      <img src="assets/zimny-mark.webp" alt="Zimny Magazine" width="30" height="30"/>
+    </a>
+    <a class="brand" href="#topo">Noite<b> dos Autores</b></a>
+  </div>
   <ul>
     <li><a href="#experiencia">Experiência</a></li>
     <li><a href="#livro">O Livro</a></li>
     <li><a href="#midia">Mídia</a></li>
     <li><a href="#gala">A Gala</a></li>
     <li><a href="#pacotes">Participações</a></li>
-    <li><a class="nav-home" href="https://zimnymagazine.com" target="_blank" rel="noopener">← Zimny Magazine</a></li>
     <li><a class="nav-cta" href="#participar">Quero participar</a></li>
   </ul>
   <button class="hamburger" id="menuBtn" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span><span></span></button>
