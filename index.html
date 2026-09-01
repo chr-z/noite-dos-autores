@@ -417,6 +417,27 @@ footer .f-sub a:hover{color:var(--gold-hi)}
   .pk-scroll .pk-dots .c-dot{width:8px;height:8px;border-radius:50%;background:var(--gold-dim);border:none;cursor:pointer;padding:0;transition:.25s}
   .pk-scroll .pk-dots .c-dot.active{width:24px;border-radius:999px;background:var(--gold)}
 }
+/* GALA — timeline com imagens de fundo por momento */
+.gala-tl{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-top:56px;align-items:stretch}
+.gala-step{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:var(--panel);display:flex;flex-direction:column;min-height:360px;transition:border-color .3s,transform .3s,box-shadow .3s}
+.gala-step::before{content:'';position:absolute;inset:0;background:var(--mom) center/cover;opacity:.5;transition:transform .7s ease,opacity .35s}
+.gala-step:hover::before{transform:scale(1.06);opacity:.68}
+.gala-step::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,5,4,.15) 15%,rgba(6,5,4,.82) 72%,#060504 100%)}
+.gala-step:hover{border-color:var(--gold);transform:translateY(-5px);box-shadow:0 22px 55px rgba(0,0,0,.5)}
+.gala-num{position:absolute;top:14px;left:14px;width:46px;height:46px;border-radius:50%;border:1px solid var(--gold-dim);background:radial-gradient(circle at 30% 25%,rgba(201,150,60,.22),rgba(6,5,4,.62));display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--gold-hi);z-index:3;box-shadow:0 6px 18px rgba(0,0,0,.4)}
+.gala-body{position:relative;z-index:2;margin-top:auto;padding:120px 18px 22px;display:flex;flex-direction:column}
+.gala-body h3{font-size:1.18rem;margin-bottom:6px}
+.gala-body p{color:var(--muted);font-size:.8rem;line-height:1.55}
+@media(max-width:1020px){.gala-tl{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.gala-tl{grid-template-columns:1fr}.gala-step{min-height:300px}}
+/* hero: entrada em cascata */
+header .rv:nth-child(1){transition-delay:.05s}
+header .rv:nth-child(2){transition-delay:.15s}
+header .rv:nth-child(3){transition-delay:.25s}
+header .rv:nth-child(4){transition-delay:.35s}
+header .rv:nth-child(5){transition-delay:.45s}
+header .rv:nth-child(6){transition-delay:.55s}
+header .rv:nth-child(7){transition-delay:.65s}
 /* reduced motion */
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
@@ -701,14 +722,28 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
       <h2 class="rv">Um palco à altura da<br><em class="gold-text" style="font-style:italic">sua conquista</em></h2>
       <p class="rv" style="color:var(--muted);margin-top:18px">A Gala de Lançamento é a noite em que sua história sobe ao palco — cinco momentos pensados para consagrar sua trajetória:</p>
     </div>
-    <div class="tl">
-      <div class="step rv"><b>Momento I</b><h3>Chegada &amp; Red Carpet</h3><p>Recepção como autor, registro fotográfico com o livro e microentrevista.</p></div>
-      <div class="step rv"><b>Momento II</b><h3>Cerimônia</h3><p>Abertura oficial e reconhecimento de cada autor presente.</p></div>
-      <div class="step rv"><b>Momento III</b><h3>Palco</h3><p>Foto no telão, frase de impacto e apresentação breve e guiada com o livro.</p></div>
-      <div class="step rv"><b>Momento IV</b><h3>Autógrafos</h3><p>Salão editorial para dedicatórias com família, amigos e convidados.</p></div>
-      <div class="step rv"><b>Momento V</b><h3>Celebração</h3><p>Open Food &amp; Soda, brindes à mesa e networking de alto nível.</p></div>
+    <div class="gala-tl">
+      <div class="gala-step rv" style="--mom:url('assets/momentos/1.webp')">
+        <span class="gala-num">I</span>
+        <div class="gala-body"><h3>Chegada &amp; Red Carpet</h3><p>Recepção como autor, registro fotográfico com o livro e microentrevista.</p></div>
+      </div>
+      <div class="gala-step rv" style="--mom:url('assets/momentos/2.webp')">
+        <span class="gala-num">II</span>
+        <div class="gala-body"><h3>Cerimônia</h3><p>Abertura oficial e reconhecimento de cada autor presente.</p></div>
+      </div>
+      <div class="gala-step rv" style="--mom:url('assets/momentos/3.webp')">
+        <span class="gala-num">III</span>
+        <div class="gala-body"><h3>Palco</h3><p>Foto no telão, frase de impacto e apresentação breve e guiada com o livro.</p></div>
+      </div>
+      <div class="gala-step rv" style="--mom:url('assets/momentos/4.webp')">
+        <span class="gala-num">IV</span>
+        <div class="gala-body"><h3>Autógrafos</h3><p>Salão editorial para dedicatórias com família, amigos e convidados.</p></div>
+      </div>
+      <div class="gala-step rv" style="--mom:url('assets/momentos/5.webp')">
+        <span class="gala-num">V</span>
+        <div class="gala-body"><h3>Celebração</h3><p>Open Food &amp; Soda, brindes à mesa e networking de alto nível.</p></div>
+      </div>
     </div>
-    <div class="frame rv" style="margin-top:54px"><img src="assets/autografos.webp" alt="Salão de Autógrafos" loading="lazy"/></div>
   </div>
 </section>
 
