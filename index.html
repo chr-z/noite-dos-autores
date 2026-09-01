@@ -851,12 +851,13 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
         <div class="ornament rv"><span></span>✦<span></span></div>
       <span class="kicker rv">Próximo passo</span>
         <h2 class="rv" style="font-size:clamp(1.9rem,4vw,2.9rem)">Sua vaga está esperando</h2>
-        <p class="rv" style="color:var(--muted);margin-top:12px">Três campos e a gente cuida do resto. Sem formulário gigante, sem compromisso — só um papo direto com a equipe.</p>
+        <p class="rv" style="color:var(--muted);margin-top:12px">Quatro campos e a gente cuida do resto. Sem formulário gigante, sem compromisso — só um papo direto com a equipe.</p>
       </div>
       <form id="leadForm">
         <div class="f-grid">
           <div class="f-field"><label for="fName">Seu nome *</label><input id="fName" required placeholder="Como você quer ser chamado"/></div>
           <div class="f-field"><label for="fPhone">Seu WhatsApp *</label><input id="fPhone" required inputmode="tel" placeholder="+1 (___) ___-____"/></div>
+          <div class="f-field"><label for="fInsta">Seu Instagram</label><input id="fInsta" inputmode="url" placeholder="@seu.nome"/></div>
           <div class="f-field f-full"><label for="fPkg">O que te interessa?</label>
             <select id="fPkg">
               <option>Quero entender melhor</option>
@@ -938,11 +939,12 @@ document.getElementById('leadForm').addEventListener('submit',e=>{
   const hp=document.getElementById('fHp');
   if(hp&&hp.value){return;} // honeypot: bot preencheu, ignora
   const g=id=>document.getElementById(id).value.trim();
-  const lead={nome:g('fName'),whatsapp:g('fPhone'),interesse:g('fPkg')};
+  const lead={nome:g('fName'),whatsapp:g('fPhone'),interesse:g('fPkg'),insta:g('fInsta')};
   const msg=[
     '*NOITE DOS AUTORES — Novo interessado (site)*','',
     '*Nome:* '+lead.nome,
     '*WhatsApp:* '+lead.whatsapp,
+    '*Instagram:* '+(lead.insta||'—'),
     '*Interesse:* '+lead.interesse,
   ].filter(Boolean).join('\n');
   if(LEADS_ENDPOINT){
