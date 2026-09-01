@@ -293,8 +293,7 @@ h2{font-size:clamp(2.1rem,4.8vw,3.7rem);margin-top:16px}
 .bruno-corners i:nth-child(2){top:-1px;right:-1px;border-left:none;border-bottom:none;border-top-right-radius:26px}
 .bruno-corners i:nth-child(3){bottom:-1px;left:-1px;border-right:none;border-top:none;border-bottom-left-radius:26px}
 .bruno-corners i:nth-child(4){bottom:-1px;right:-1px;border-left:none;border-top:none;border-bottom-right-radius:26px}
-.bruno-badge{position:absolute;top:26px;left:50%;transform:translateX(-50%);z-index:4;background:linear-gradient(105deg,#b8862f,#e8c477);color:#120d04;font-size:.58rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;padding:8px 20px;border-radius:999px;box-shadow:0 8px 26px rgba(201,150,60,.4);white-space:nowrap}
-.bruno-mono{position:absolute;right:24px;bottom:24px;z-index:4;width:54px;height:54px;border-radius:50%;border:1px solid rgba(201,150,60,.65);background:rgba(6,5,4,.55);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.35rem;color:var(--gold-hi);letter-spacing:.06em;box-shadow:0 6px 20px rgba(0,0,0,.5)}
+.bruno-badge{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:4;background:linear-gradient(105deg,#b8862f,#e8c477);color:#120d04;font-size:.58rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;padding:8px 20px;border-radius:999px;box-shadow:0 8px 26px rgba(201,150,60,.4);white-space:nowrap}
 #bruno .kicker{display:inline-flex;align-items:center;gap:14px}
 #bruno .kicker::before,#bruno .kicker::after{content:'';width:44px;height:1px}
 #bruno .kicker::before{background:linear-gradient(90deg,transparent,var(--gold))}
@@ -303,7 +302,7 @@ h2{font-size:clamp(2.1rem,4.8vw,3.7rem);margin-top:16px}
 .bruno-quote{position:relative;margin-top:26px;padding:18px 26px 18px 54px;border-left:1px solid var(--gold-dim);background:linear-gradient(90deg,rgba(201,150,60,.06),transparent);border-radius:0 14px 14px 0}
 .bruno-quote::before{content:'“';position:absolute;left:16px;top:2px;font-family:'Cormorant Garamond',serif;font-size:3.4rem;color:var(--gold);line-height:1.1}
 #bruno::after{content:'';position:absolute;left:50%;bottom:-60px;width:min(900px,92%);height:320px;transform:translateX(-50%);background:radial-gradient(ellipse at center,rgba(201,150,60,.09),transparent 70%);pointer-events:none;z-index:0}
-@media(max-width:560px){.bruno-frame{max-width:min(380px,100%)}.bruno-mono{width:46px;height:46px;font-size:1.15rem;right:18px;bottom:18px}.bruno-badge{top:20px;font-size:.54rem;padding:7px 16px}}
+@media(max-width:560px){.bruno-frame{max-width:min(380px,100%)}.bruno-badge{bottom:20px;font-size:.54rem;padding:7px 16px}}
 
 footer{text-align:center;padding:44px 20px;color:#5c554a;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;border-top:1px solid rgba(201,150,60,.1)}
 
@@ -942,7 +941,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
         <div class="bruno-corners" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
         <img src="assets/bruno-gancho.webp" alt="Bruno Zimny apresenta a Noite dos Autores — 05 de dezembro, Marlborough MA. Sua história merece ser publicada, celebrada e lembrada." fetchpriority="high"/>
         <span class="bruno-badge">Anfitrião da Noite</span>
-        <span class="bruno-mono" aria-hidden="true">BZ</span>
       </div>
     </div>
     <div>
@@ -951,11 +949,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
       <p class="rv bruno-role">Fundador &amp; CEO · Zimny Media Corporation</p>
       <p class="rv" style="color:var(--muted);margin-top:20px">Fundador e CEO da Zimny Media Corporation, Bruno construiu uma das maiores plataformas de mídia brasileira nos Estados Unidos — e está colocando a estrutura inteira a serviço da <strong style="color:var(--cream)">sua história</strong>.</p>
       <blockquote class="bruno-quote rv" style="font-family:'Cormorant Garamond';font-style:italic;font-size:clamp(1.2rem,2.2vw,1.5rem);color:var(--gold-hi);margin-top:26px"><span style="color:var(--cream)">“Sua história merece mais do que apenas ser contada.</span> Merece ser publicada, celebrada e lembrada.”</blockquote>
-      <div class="stats-elegant rv" style="max-width:100%;margin-top:30px">
-        <div class="se-item"><span class="se-num">3</span><span class="se-label">Estados — MA · FL · CA</span></div>
-        <div class="se-item"><span class="se-num">100<em>%</em></span><span class="se-label">Mídia brasileira</span></div>
-        <div class="se-item"><span class="se-num">05<em>·12</em></span><span class="se-label">A grande noite</span></div>
-      </div>
       <div class="cta-row rv" style="justify-content:flex-start;margin-top:30px">
         <a class="btn btn-gold" href="#participar">Garantir minha vaga</a>
         <a class="btn btn-line" href="https://zimnymagazine.com" target="_blank" rel="noopener">Conheça a Zimny</a>
