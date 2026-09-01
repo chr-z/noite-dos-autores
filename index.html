@@ -132,25 +132,20 @@ h1{font-size:clamp(3.4rem,10vw,8rem);text-transform:uppercase;letter-spacing:.05
 .sec-head.center{margin-inline:auto;text-align:center}
 h2{font-size:clamp(2.1rem,4.8vw,3.7rem);margin-top:16px}
 
-/* NARRATIVA — timeline de capítulos */
-.journey{display:flex;align-items:flex-start;justify-content:center;gap:0;margin-top:60px;position:relative;flex-wrap:nowrap;width:100%}
-.journey .j-line{position:absolute;top:27px;left:8%;right:8%;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim) 15%,var(--gold-dim) 85%,transparent);opacity:.5}
-.journey .j-step{flex:1 1 0;min-width:0;text-align:center;position:relative;padding:0 10px;white-space:nowrap}
-.journey .j-num{width:54px;height:54px;margin:0 auto 14px;border-radius:50%;border:1px solid var(--gold-dim);display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 30% 25%,rgba(201,150,60,.16),rgba(6,5,4,.4));font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--gold-hi);position:relative;z-index:2;transition:.3s;flex-shrink:0}
-.journey .j-step:hover .j-num{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 10px 30px rgba(201,150,60,.25)}
-.journey .j-step b{display:block;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1rem,1.6vw,1.3rem);color:var(--cream);font-weight:500;line-height:1.25}
-.journey .j-step small{display:block;font-size:.52rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-top:5px}
-@media(max-width:980px){
-  .journey .j-step{padding:0 6px}
-  .journey .j-num{width:46px;height:46px;font-size:1rem}
-  .journey .j-line{top:23px}
-}
-@media(max-width:720px){
-  .journey{flex-direction:column;align-items:center;gap:26px}
-  .journey .j-line{display:none}
-  .journey .j-step{display:flex;align-items:center;gap:16px;text-align:left;width:100%;max-width:340px;padding:0;white-space:normal}
-  .journey .j-num{margin:0;flex-shrink:0}
-  .journey .j-step small{margin-top:2px}
+/* NARRATIVA — arco da história (tipográfico, sem números) */
+.arc{display:flex;align-items:stretch;justify-content:space-between;gap:0;margin-top:64px;position:relative;width:100%}
+.arc-step{flex:1 1 0;min-width:0;text-align:center;padding:0 14px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;position:relative}
+.arc-word{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.1;background:linear-gradient(105deg,#a87c2e,#e8c477 45%,#c9963c 70%,#f4dfa8);-webkit-background-clip:text;background-clip:text;color:transparent;transition:.35s;letter-spacing:.01em}
+.arc-step:hover .arc-word{filter:drop-shadow(0 0 18px rgba(201,150,60,.4))}
+.arc-step small{display:block;margin-top:10px;font-size:.56rem;letter-spacing:.26em;text-transform:uppercase;color:var(--muted);line-height:1.7;max-width:170px}
+.arc-orn{flex:0 0 auto;display:flex;align-items:center;color:var(--gold-dim);font-size:.85rem;padding-top:6px}
+.arc-orn::before{content:'';width:34px;height:1px;background:linear-gradient(90deg,var(--gold-dim),transparent);align-self:center}
+.arc-orn::after{content:'';width:34px;height:1px;background:linear-gradient(270deg,var(--gold-dim),transparent);align-self:center}
+@media(max-width:860px){
+  .arc{flex-direction:column;align-items:center;gap:0;max-width:340px;margin-inline:auto}
+  .arc-step{width:100%;padding:22px 0;text-align:center}
+  .arc-step small{max-width:none}
+  .arc-orn{transform:rotate(90deg);margin:2px 0}
 }
 
 /* PILARES */
@@ -543,13 +538,16 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
     </div>
   </div>
   <div class="wrap">
-    <div class="journey">
-      <div class="j-line" aria-hidden="true"></div>
-      <div class="j-step rv"><div class="j-num">I</div><b>Você viveu</b><small>a jornada</small></div>
-      <div class="j-step rv"><div class="j-num">II</div><b>Você venceu</b><small>as barreiras</small></div>
-      <div class="j-step rv"><div class="j-num">III</div><b>Você recomeçou</b><small>de novo</small></div>
-      <div class="j-step rv"><div class="j-num">IV</div><b>Você aprendeu</b><small>o caminho</small></div>
-      <div class="j-step rv"><div class="j-num">V</div><b>O próximo autor</b><small>pode ser você</small></div>
+    <div class="arc">
+      <div class="arc-step rv"><b class="arc-word">Vivida</b><small>a jornada que já é sua</small></div>
+      <span class="arc-orn rv" aria-hidden="true">✦</span>
+      <div class="arc-step rv"><b class="arc-word">Escrita</b><small>transformada em obra</small></div>
+      <span class="arc-orn rv" aria-hidden="true">✦</span>
+      <div class="arc-step rv"><b class="arc-word">Publicada</b><small>impressa com o seu nome</small></div>
+      <span class="arc-orn rv" aria-hidden="true">✦</span>
+      <div class="arc-step rv"><b class="arc-word">Celebrada</b><small>palco, gala e mídia</small></div>
+      <span class="arc-orn rv" aria-hidden="true">✦</span>
+      <div class="arc-step rv"><b class="arc-word">Lembrada</b><small>o legado que fica</small></div>
     </div>
     <div class="pillars">
       <div class="pillar rv"><div class="p-img"><img src="assets/pilar-livro.webp" alt="Livro publicado" loading="lazy"/></div><div class="p-body"><h3>Livro publicado</h3><p>Sua história eternizada em obra impressa com identidade editorial própria.</p></div></div>
