@@ -230,7 +230,12 @@ h2{font-size:clamp(2.1rem,4.8vw,3.7rem);margin-top:16px}
 .pk a.btn{width:100%;box-sizing:border-box;white-space:nowrap;padding:16px 12px;line-height:1.5;letter-spacing:.18em;font-size:.7rem}
 
 /* FORM */
-.form-box{border:1px solid var(--line);border-radius:28px;padding:64px 44px;background:radial-gradient(ellipse at top,rgba(201,150,60,.08),transparent 60%),var(--bg2);max-width:860px;margin:0 auto}
+#participar{overflow:hidden}
+#participar .p-bg{position:absolute;inset:0;background:url('assets/hero.webp') center/cover;opacity:.5;filter:saturate(1.2) brightness(.85);z-index:0}
+#participar .p-bg::after{content:'';position:absolute;inset:0;background:
+  radial-gradient(ellipse 70% 55% at 50% 45%,transparent 35%,rgba(6,5,4,.62) 100%),
+  linear-gradient(180deg,rgba(6,5,4,.72),transparent 26%,transparent 74%,rgba(6,5,4,.82));pointer-events:none}
+.form-box{border:1px solid var(--line);border-radius:28px;padding:64px 44px;background:rgba(10,8,5,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);max-width:860px;margin:0 auto;position:relative}
 .f-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:36px}
 @media(max-width:700px){.f-grid{grid-template-columns:1fr}.form-box{padding:44px 22px}}
 .f-field label{display:block;font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;font-weight:600}
@@ -839,6 +844,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 
 <!-- FORMULÁRIO -->
 <section id="participar" style="background:var(--bg2)" data-sec="06">
+  <div class="p-bg" aria-hidden="true"></div>
   <div class="wrap">
     <div class="form-box rv">
       <div class="sec-head center" style="margin-bottom:0">
