@@ -955,8 +955,8 @@ document.getElementById('floatWa').href=waLink(WA_ZIMNY,'Olá! Vim pelo site da 
 document.getElementById('cardOficial').href=waLink(WA_ZIMNY,'Olá! Vim pelo site da NOITE DOS AUTORES.');
 document.getElementById('cardThamara').href=waLink(WA_THAMARA,'Olá! Vim pelo site da NOITE DOS AUTORES.');
 
-// Formulario -> salva lead + WhatsApp oficial com dados estruturados
-const LEADS_ENDPOINT=''; // preenchido quando o acumulador estiver no ar
+// Formulario -> salva lead (acumulador Cloudflare) + WhatsApp
+const LEADS_ENDPOINT='https://noite-dos-autores.pages.dev/api/lead';
 document.getElementById('leadForm').addEventListener('submit',e=>{
   e.preventDefault();
   const hp=document.getElementById('fHp');
