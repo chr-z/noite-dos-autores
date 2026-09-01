@@ -404,7 +404,7 @@ footer .f-sub a{color:var(--gold-dim);text-decoration:none;transition:.25s}
 footer .f-sub a:hover{color:var(--gold-hi)}
 /* pacotes: 4 na mesma linha no desktop, swipe horizontal no mobile */
 .pk-scroll{position:relative;margin-top:54px}
-.pk-scroll-track{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;align-items:stretch}
+.pk-scroll-track{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;align-items:stretch;width:100%}
 .pk-scroll .pk{min-width:0}
 .pk-scroll .pk-arrow,.pk-scroll .pk-hint,.pk-scroll .pk-dots{display:none}
 @media(max-width:900px){
@@ -419,7 +419,7 @@ footer .f-sub a:hover{color:var(--gold-hi)}
   .pk-scroll .pk-dots .c-dot.active{width:24px;border-radius:999px;background:var(--gold)}
 }
 /* GALA — timeline com imagem de fundo por momento (cards largos, corte mínimo) */
-.gala-tl{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-top:56px;align-items:stretch}
+.gala-tl{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-top:56px;align-items:stretch;width:100%}
 .gala-step{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:var(--panel);aspect-ratio:1.4;transition:border-color .3s,transform .3s,box-shadow .3s}
 .gala-step::before{content:'';position:absolute;inset:0;background:var(--mom) center/cover;opacity:.66;transition:transform .7s ease,opacity .35s}
 .gala-step:hover::before{transform:scale(1.06);opacity:.82}
