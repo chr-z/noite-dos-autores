@@ -377,6 +377,17 @@ nav ul a:hover::after{transform:scaleX(1)}
 .drawer a:hover{color:var(--gold-hi)}
 .drawer .nav-cta{font-family:'Montserrat',sans-serif;font-size:.72rem;letter-spacing:.24em;border:1px solid var(--gold-dim);padding:13px 30px;border-radius:999px;color:var(--gold-hi)!important;margin-top:10px}
 @media(max-width:900px){.hamburger{display:flex}nav ul{display:none}}
+/* botões centralizados no mobile (hero, livro, bruno) */
+@media(max-width:700px){
+  .cta-row{justify-content:center!important}
+}
+/* mobile: header invisivel, hamburger flutuante (some ao descer, aparece ao subir) */
+@media(max-width:900px){
+  nav{background:transparent!important;border-bottom:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;padding:0;pointer-events:none}
+  .nav-left{display:none}
+  .hamburger{position:fixed;top:14px;right:14px;width:48px;height:48px;border-radius:50%;background:rgba(6,5,4,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--line);align-items:center;justify-content:center;z-index:70;pointer-events:auto;transition:transform .35s ease,opacity .35s ease;box-shadow:0 8px 28px rgba(0,0,0,.45)}
+  .hamburger.hidden-mobile{transform:translateY(-90px);opacity:0;pointer-events:none}
+}
 /* contador regressivo */
 .countdown{display:inline-flex;margin-top:34px;border:1px solid var(--line);border-radius:999px;padding:12px 30px;background:rgba(20,17,10,.5);backdrop-filter:blur(6px)}
 .countdown .cd-item{display:flex;align-items:baseline;gap:7px;padding:0 15px;position:relative}
@@ -1075,6 +1086,30 @@ document.querySelectorAll('.go-form').forEach(btn=>{
     if(map[pkg]) sel.value=map[pkg];
   });
 });
+
+// hamburger flutuante: some ao rolar para baixo, aparece ao rolar para cima (mobile)
+(function(){
+  const btn=document.getElementById('menuBtn');
+  const dr=document.getElementById('drawer');
+  if(!btn) return;
+  let lastY=window.scrollY;
+  let ticking=false;
+  function update(){
+    ticking=false;
+    const y=window.scrollY;
+    const drawerOpen=dr&&dr.classList.contains('open');
+    if(!drawerOpen){
+      if(y>lastY&&y>90){btn.classList.add('hidden-mobile');}
+      else{btn.classList.remove('hidden-mobile');}
+    }
+    lastY=y;
+  }
+  addEventListener('scroll',()=>{
+    if(!ticking){ticking=true;requestAnimationFrame(update);}
+  },{passive:true});
+  // se abrir o drawer, garante botão visível (vira X de fechar)
+  if(btn&&dr)dr.addEventListener('transitionend',()=>{if(dr.classList.contains('open'))btn.classList.remove('hidden-mobile');});
+})();
 
 // menu mobile (hamburger + drawer)
 const menuBtn=document.getElementById('menuBtn');
