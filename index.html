@@ -52,7 +52,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="assets/hero.webp">
 <link rel="preload" as="image" href="assets/logo-noite.webp">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&family=Outfit:wght@200;300;400;500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#060504; --bg2:#0d0b08; --panel:#14110a;
@@ -89,7 +89,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:
 nav.solid{background:rgba(6,5,4,.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom-color:var(--line)}
 .nav-left{display:flex;align-items:center;gap:14px}
 .zimny-mark{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:radial-gradient(circle at 32% 26%,rgba(201,150,60,.14),rgba(6,5,4,.55));transition:.3s;flex-shrink:0}
-.zimny-mark img{width:22px;height:22px;display:block;filter:drop-shadow(0 2px 8px rgba(201,150,60,.35))}
+.zimny-mark .zimny-z{font-family:'Playfair Display',serif;font-weight:700;font-size:1.42rem;line-height:1;letter-spacing:.01em;
+  background:linear-gradient(115deg,#a87c2e 0%,#e8c477 38%,#f4dfa8 50%,#c9963c 62%,#8a6a2f 100%);
+  background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:zimny-shine 4.5s linear infinite;padding-left:1px}
+@keyframes zimny-shine{to{background-position:220% center}}
 .zimny-mark:hover{border-color:var(--gold);box-shadow:0 0 20px rgba(201,150,60,.35);transform:translateY(-1px)}
 nav .brand{font-family:'Cormorant Garamond',serif;font-size:1.28rem;letter-spacing:.22em;color:var(--cream);text-decoration:none;text-transform:uppercase}
 nav .brand b{color:var(--gold)}
@@ -477,7 +481,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 <nav id="nav">
   <div class="nav-left">
     <a class="zimny-mark" href="https://zimnymagazine.com" target="_blank" rel="noopener" aria-label="Zimny Magazine — site oficial">
-      <img src="assets/zimny-mark.webp" alt="Zimny Magazine" width="30" height="30"/>
+      <span class="zimny-z" aria-hidden="true">Z</span>
     </a>
     <a class="brand" href="#topo">Noite<b> dos Autores</b></a>
   </div>
