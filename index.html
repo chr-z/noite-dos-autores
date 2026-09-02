@@ -78,11 +78,12 @@ section{position:relative;padding:110px 24px}
 
 /* HERO SIMÉTRICO */
 header{padding:0;text-align:center}
-.hero-photo{position:absolute;inset:0;background:url('assets/hero.webp') center/cover;opacity:.34;filter:saturate(1.15)}
+.hero-photo{position:absolute;inset:0;background:url('assets/hero.webp') center/cover;opacity:.62;filter:saturate(1.4) brightness(1.12);animation:hero-zoom 36s ease-in-out infinite alternate;will-change:transform}
 .hero-photo::after{content:'';position:absolute;inset:0;background:
-  linear-gradient(180deg,rgba(6,5,4,.55),transparent 30%,rgba(6,5,4,.82) 78%,var(--bg)),
-  radial-gradient(ellipse 62% 58% at 50% 46%,transparent 40%,rgba(6,5,4,.55) 100%)}
-.vignette{position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 220px 90px rgba(6,5,4,.92)}
+  linear-gradient(180deg,rgba(6,5,4,.3),transparent 30%,rgba(6,5,4,.4) 62%,rgba(6,5,4,.72) 84%,var(--bg)),
+  radial-gradient(ellipse 66% 60% at 50% 44%,transparent 60%,rgba(6,5,4,.26) 100%)}
+.vignette{position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 150px 46px rgba(6,5,4,.5),inset 0 0 50px 14px rgba(6,5,4,.22)}
+@keyframes hero-zoom{from{transform:scale(1.01)}to{transform:scale(1.12)}}
 .hero-inner{min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:120px 24px 90px;max-width:1100px;margin:0 auto}
 .present{letter-spacing:.4em}
 h1{letter-spacing:.09em;font-weight:600;text-shadow:0 6px 60px rgba(0,0,0,.65)}
@@ -111,7 +112,9 @@ nav .nav-cta{border:1px solid var(--gold-dim);padding:9px 20px;border-radius:999
 
 /* HERO */
 header{min-height:100svh;position:relative;overflow:hidden}
-.glow{position:absolute;width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(201,150,60,.16),transparent 62%);top:-260px;left:50%;transform:translateX(-50%)}
+.glow{position:absolute;width:980px;height:980px;border-radius:50%;background:radial-gradient(circle,rgba(201,150,60,.3),transparent 62%);top:-300px;left:50%;transform:translateX(-50%);animation:glow-breathe 7s ease-in-out infinite}
+.glow-b{position:absolute;width:1180px;height:640px;left:50%;top:42%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(ellipse at center,rgba(232,196,119,.13),transparent 68%);filter:blur(8px);pointer-events:none;animation:glow-breathe 9s ease-in-out infinite}
+@keyframes glow-breathe{0%,100%{opacity:.72}50%{opacity:1}}
 .grain{position:absolute;inset:0;opacity:.5;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .04 0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E")}
 header>*{position:relative;z-index:2}
 .present{display:flex;gap:16px;align-items:center;margin-bottom:26px}
@@ -119,10 +122,10 @@ header>*{position:relative;z-index:2}
 .present .ln:last-child{background:linear-gradient(90deg,var(--gold),transparent)}
 h1{font-size:clamp(3.4rem,10vw,8rem);text-transform:uppercase;letter-spacing:.05em;font-weight:600}
 .hero-logo{max-width:min(720px,86vw);width:100%;margin:18px auto 0;font-size:0;line-height:0;letter-spacing:0;text-transform:none;font-weight:400}
-.hero-logo img{width:100%;height:auto;display:block;filter:drop-shadow(0 8px 40px rgba(0,0,0,.6))}
-.hero-narrative{margin-top:38px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.25rem,2.6vw,1.8rem);color:#d8cdb8;line-height:1.5}
+.hero-logo img{width:100%;height:auto;display:block;filter:drop-shadow(0 10px 46px rgba(0,0,0,.72))}
+.hero-narrative{margin-top:38px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.25rem,2.6vw,1.8rem);color:#e4d9c4;line-height:1.5;text-shadow:0 2px 16px rgba(0,0,0,.55),0 0 4px rgba(0,0,0,.3)}
 .hero-narrative b{color:var(--gold-hi);font-weight:500}
-.date-badge{display:inline-flex;gap:14px;align-items:center;border:1px solid var(--line);border-radius:999px;padding:11px 28px;margin-top:34px;background:rgba(20,17,10,.55);backdrop-filter:blur(6px);font-size:.78rem;letter-spacing:.3em;text-transform:uppercase}
+.date-badge{display:inline-flex;gap:14px;align-items:center;border:1px solid var(--line);border-radius:999px;padding:11px 28px;margin-top:34px;background:rgba(14,11,6,.42);backdrop-filter:blur(6px);font-size:.78rem;letter-spacing:.3em;text-transform:uppercase}
 .date-badge .dot{width:4px;height:4px;border-radius:50%;background:var(--gold)}
 .cta-row{display:flex;gap:16px;margin-top:44px;flex-wrap:wrap;justify-content:center}
 .btn{padding:17px 40px;border-radius:999px;text-decoration:none;font-size:.74rem;letter-spacing:.26em;text-transform:uppercase;font-weight:600;transition:.25s;display:inline-block}
@@ -396,7 +399,7 @@ nav ul a:hover::after{transform:scaleX(1)}
   .hamburger.hidden-mobile{transform:translateY(-90px);opacity:0;pointer-events:none}
 }
 /* contador regressivo */
-.countdown{display:inline-flex;margin-top:34px;border:1px solid var(--line);border-radius:999px;padding:12px 30px;background:rgba(20,17,10,.5);backdrop-filter:blur(6px)}
+.countdown{display:inline-flex;margin-top:34px;border:1px solid var(--line);border-radius:999px;padding:12px 30px;background:rgba(14,11,6,.38);backdrop-filter:blur(6px)}
 .countdown .cd-item{display:flex;align-items:baseline;gap:7px;padding:0 15px;position:relative}
 .countdown .cd-item:not(:last-child)::after{content:':';position:absolute;right:-3px;color:var(--gold-dim);font-weight:300;font-size:1.1rem}
 .countdown b{font-family:'Outfit',sans-serif;font-weight:200;font-size:1.5rem;color:#f4e3c2;letter-spacing:.03em;min-width:2ch;text-align:center}
@@ -495,7 +498,7 @@ header .rv:nth-child(7){transition-delay:.65s}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
   .rv{opacity:1;transform:none}
-  .grain,.glow{display:none}
+  .grain,.glow,.glow-b{display:none}
 }
 /* anchors nao ficam cobertos pela nav fixa */
 section[id],header[id]{scroll-margin-top:72px}
@@ -544,7 +547,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 
 <!-- HERO -->
 <header id="topo">
-  <div class="hero-photo"></div><div class="glow"></div><div class="grain"></div><div class="vignette"></div>
+  <div class="hero-photo"></div><div class="glow"></div><div class="glow-b"></div><div class="grain"></div><div class="vignette"></div>
   <div class="hero-inner">
     <p class="kicker rv present">Zimny Media Corp</p>
     <h1 class="hero-logo rv"><img src="assets/logo-nda.webp" alt="Noite dos Autores — Sua história merece virar um livro" width="1100" height="476"/></h1>
