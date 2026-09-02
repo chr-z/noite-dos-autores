@@ -57,6 +57,7 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="assets/hero-palavras.webp">
+<link rel="preload" as="image" href="assets/hero-mobile.webp" media="(max-width:900px)">
 <link rel="preload" as="image" href="assets/logo-nda.webp">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&family=Outfit:wght@200;300;400;500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
 <style>
@@ -82,6 +83,7 @@ header{padding:0;text-align:center}
 .hero-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 76%,rgba(6,5,4,.42) 94%,var(--bg))}
 .vignette{position:absolute;inset:0;pointer-events:none}
 @keyframes hero-zoom{from{transform:scale(1.01)}to{transform:scale(1.12)}}
+@media(max-width:900px){.hero-photo{background-image:url('assets/hero-mobile.webp')}}
 .hero-inner{min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:120px 24px 90px;max-width:1100px;margin:0 auto}
 .present{letter-spacing:.4em}
 h1{letter-spacing:.09em;font-weight:600;text-shadow:0 6px 60px rgba(0,0,0,.65)}
